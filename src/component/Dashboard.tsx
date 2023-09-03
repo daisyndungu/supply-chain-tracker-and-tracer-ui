@@ -4,15 +4,7 @@ import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 
 import ItemsTable from './ItemsTable';
 
-interface IItem { // TODO - refactor(move to utils)
-    name: string;
-    color: string;
-    serialNumber: string;
-    createdAt: Date,
-    consumerId: string;
-    createdBy: string;
-    status: string;
-}
+import { IItem } from '../utils/Constants'
 
 const Dashboard: React.FC = () => {
     const [myItems, setMyItems] = useState<IItem[]>([]);

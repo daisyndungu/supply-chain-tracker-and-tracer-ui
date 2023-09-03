@@ -10,24 +10,10 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 
-interface FormData {
-    username: string,
-    emailAddress: string,
-    address: string,
-    companyName: string,
-    city: string,
-    country: string,
-    phoneNumber: string, // Peform phone number verification
-    // userRole: UserRole,//TODO
-    password: string
-}
-
-interface ApiResponse {
-  message: string;
-}
+import { SuccessfulApiResponse, RegistrationFormData } from '../utils/Constants'
 
 const RegistrationForm: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<RegistrationFormData>({
     username: '',
     emailAddress: '',
     address: '',
@@ -51,7 +37,7 @@ const RegistrationForm: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post<ApiResponse>('http://localhost:3000/supplychain/api/v1/register', formData);
+      const response = await axios.post<SuccessfulApiResponse>('http://localhost:3000/supplychain/api/v1/register', formData);
       console.log('Registration successful', response.data);
     } catch (err) {
       setError('Registration failed. Please check your data.');

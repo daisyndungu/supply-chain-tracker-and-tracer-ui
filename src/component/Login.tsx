@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   FormControl,
   FormLabel,
@@ -8,14 +9,11 @@ import {
   Box,
   Heading,
 } from '@chakra-ui/react';
-import axios from 'axios';
 
-// API response
-interface ApiResponse {
-  token: string;
-}
+import { login } from '../utils/Auth'
 
 const LoginForm: React.FC = () => {
+  const navigate = useNavigate();
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -24,16 +22,12 @@ const LoginForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    try {
-        // TODO remove url
-        const response = await axios.post<ApiResponse>('http://localhost:3000/supplychain/api/v1/login', {
-            emailAddress,
-            password,
-          });
+    const isAuthenticated = await login(emailAddress, password);
 
-          console.log('Auth Token:', response.data.token);
-    } catch (error) {
-      setError('Authentication failed. Please check your credentials.');
+    if(isAuthenticated){
+        navigate('/dashboard');
+    } else {
+        setError('Authentication failed. Please check your credentials.');
     }
   };
 

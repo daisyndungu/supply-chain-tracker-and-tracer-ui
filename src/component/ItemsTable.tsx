@@ -1,16 +1,7 @@
 import React from 'react';
-
 import { Table, Thead, Th, Tr, Tbody, Td } from '@chakra-ui/react'
 
-interface IItem { // TODO - refactor(move to utils)
-    name: string;
-    color: string;
-    serialNumber: string;
-    createdAt: Date,
-    consumerId: string; // TODO custodian
-    createdBy: string;
-    status: string; //add status eg missing, returned, notreturned
-}
+import { IItem } from '../utils/Constants'
 
 const ItemsTable: React.FC<{items: IItem[]}> = ({items}) => {
 

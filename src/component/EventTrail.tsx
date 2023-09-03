@@ -1,31 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import { MdCheckCircle } from 'react-icons/md'
 import { Box, Stepper, Step, StepIndicator, StepStatus, StepDescription, StepIcon, StepNumber, StepTitle, StepSeparator } from '@chakra-ui/react';
 
-enum Status {
-    Dispatched = 'DISPATCHED',
-    Pending = 'PENDING',
-    Closed = 'CLOSED',
-    InProgress = 'INPROGRESS',
-    Cancelled = 'CANCELLED',
-    DELIVERED = 'DELIVERED'
-}
-
-interface IItemEvent {
-    _id: string,
-    itemId: string,
-    custodianId: string,
-    updatedBy: string
-    createdAt: Date,
-    location: string,
-    status: Status,
-}
+import { IItemEvent } from '../utils/Constants'
 
 const EventTrail: React.FC<{ itemId: string }> = ({ itemId }) => {
 
     const [ events, setEvents] = useState<IItemEvent[]>([]);
-    
+
     useEffect(()=>{
         // Fetch all Item Events for a given item id
         axios.get(`http://localhost:3000/supplychain/api/v1/items/${itemId}/events`, {

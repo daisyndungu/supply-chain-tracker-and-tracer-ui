@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { Box, Stepper, Step, StepIndicator, StepStatus, StepDescription, StepIcon, StepNumber, StepTitle, StepSeparator } from '@chakra-ui/react';
 
-import { IItemEvent } from '../utils/Constants'
+import { IItemEvent, TOKEN_KEY } from '../utils/Constants'
 
 const EventTrail: React.FC<{ itemId: string }> = ({ itemId }) => {
 
@@ -12,7 +12,8 @@ const EventTrail: React.FC<{ itemId: string }> = ({ itemId }) => {
         // Fetch all Item Events for a given item id
         axios.get(`http://localhost:3000/supplychain/api/v1/items/${itemId}/events`, {
             headers: {
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
+              "Authorization": localStorage.getItem(TOKEN_KEY)
             },
           })
         .then((res) => {
@@ -22,7 +23,7 @@ const EventTrail: React.FC<{ itemId: string }> = ({ itemId }) => {
         }).catch((error) => {
             console.log({error});
         });
-    }, [itemId]);
+    }, []);
 
     return(
         <Stepper index={events.length - 1} orientation='vertical' height='400px' gap='0' >

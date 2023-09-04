@@ -13,7 +13,6 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode })  => {
 const  App: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
         <Router>
           <Routes>
             <Route path="/" Component={LandingPage} />
@@ -24,7 +23,6 @@ const  App: React.FC = () => {
             } />
           </Routes>
         </Router>
-      </header>
     </div>
   );
 }

@@ -1,11 +1,20 @@
-import React from 'react';
-import { Table, Thead, Th, Tr, Tbody, Td } from '@chakra-ui/react'
+import React, {useState} from 'react';
+import { Table, Thead, Th, Tr, Tbody, Td, Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react'
+
+import EventTrail from './EventTrail'
 
 import { IItem } from '../utils/Constants'
 
 const ItemsTable: React.FC<{items: IItem[]}> = ({items}) => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
 
-    return(
+    const showEventsTrail = (itemId: string) => {
+      setSelectedItemId(itemId);
+      onOpen();
+    };
+
+    return(<>
     <Table variant='simple' size='lg'>
         <Thead>
             <Tr>
@@ -17,17 +26,30 @@ const ItemsTable: React.FC<{items: IItem[]}> = ({items}) => {
             </Tr>
         </Thead>
         <Tbody>
-            {/* add on click to redirect to other pages */}
-            {items && items.map((item) => { return(<Tr>
+            {items && items.map((item) => { return(<Tr key={item._id}>
                 <Td>{item.name}</Td>
                 <Td>{item.color}</Td>
                 <Td>{item.serialNumber}</Td>
                 <Td>{item.status}</Td>
-                <Td>View Events </Td> 
+                <Td><Button onClick={() => {showEventsTrail(item._id)}}>View Events</Button></Td> 
             </Tr>)
             })}
         </Tbody>
     </Table>
+    <Modal onClose={onClose} isOpen={isOpen} isCentered>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Item Event Trail</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            {selectedItemId && <EventTrail itemId={selectedItemId} />}
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={onClose}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
     )
 }
 

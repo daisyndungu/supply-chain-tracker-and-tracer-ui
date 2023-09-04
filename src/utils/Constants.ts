@@ -28,6 +28,7 @@ interface IItemEvent {
 }
 
 interface IItem { // TODO - refactor(move to utils)
+    _id: string;
     name: string;
     color: string;
     serialNumber: string;

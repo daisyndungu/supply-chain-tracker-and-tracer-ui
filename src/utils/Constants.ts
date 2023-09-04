@@ -8,7 +8,11 @@ interface LoginApiResponse {
 
 interface SuccessfulApiResponse {
     message: string;
-  }
+}
+
+interface UnSuccessfulApiResponse {
+    error: string;
+}
 
 enum Status {
     Dispatched = 'DISPATCHED',
@@ -53,4 +57,4 @@ interface RegistrationFormData {
 }
 
 export { TOKEN_KEY, SERVER_URL };
-export type { LoginApiResponse, IItemEvent, Status, IItem, SuccessfulApiResponse, RegistrationFormData };
+export type { LoginApiResponse, IItemEvent, Status, IItem, SuccessfulApiResponse, RegistrationFormData, UnSuccessfulApiResponse };

@@ -8,6 +8,7 @@ import {
   VStack,
   Box,
   Heading,
+  useToast
 } from '@chakra-ui/react';
 
 import { login } from '../utils/Auth'
@@ -17,6 +18,7 @@ const LoginForm: React.FC = () => {
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const toast = useToast();
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -25,7 +27,14 @@ const LoginForm: React.FC = () => {
     const isAuthenticated = await login(emailAddress, password);
 
     if(isAuthenticated){
-        navigate('/dashboard');
+        toast({
+            title: 'Logged Successfully.',
+            description: "Redirecting to Dashboard...",
+            status: 'success',
+            duration: 2000,
+            isClosable: true,
+            onCloseComplete:() => navigate('/dashboard')
+          });
     } else {
         setError('Authentication failed. Please check your credentials.');
     }

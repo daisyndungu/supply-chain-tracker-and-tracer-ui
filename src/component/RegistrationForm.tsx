@@ -7,6 +7,7 @@ import {
   VStack,
   Box,
   Heading,
+  useToast
 } from '@chakra-ui/react';
 import axios from 'axios';
 
@@ -24,6 +25,7 @@ const RegistrationForm: React.FC = () => {
     password: '',
   });
   const [error, setError] = useState<string | null>(null);
+  const toast = useToast();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -37,8 +39,16 @@ const RegistrationForm: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post<SuccessfulApiResponse>(`${SERVER_URL}/register`, formData);
-      console.log('Registration successful', response.data);
+      await axios.post<SuccessfulApiResponse>(`${SERVER_URL}/register`, formData);
+
+      toast({
+          title: 'Account created.',
+          description: "User Registered Successfully. Redirecting to login Page...",
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+          onCloseComplete: () => window.location.reload()
+        });
     } catch (err) {
       setError('Registration failed. Please check your data.');
     }

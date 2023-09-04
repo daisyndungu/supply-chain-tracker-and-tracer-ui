@@ -1,15 +1,29 @@
 import React from 'react';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 
 import './App.css';
 import LandingPage from './component/LandingPage';
+import { isAuthenticated } from './utils/Auth'
+import Dashboard from './component/Dashboard';
 
-function App() {
+const ProtectedRoute = ({ children }: { children: React.ReactNode })  => {
+  return isAuthenticated() ?<> {children}</> : <Navigate to="/" />;
+};
+
+const  App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Welcome</h1>
-        {/* <EventTrail itemId='64ef2cbf481cc4e24cb23117' /> */}
-        <LandingPage />
+        <Router>
+          <Routes>
+            <Route path="/" Component={LandingPage} />
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            } />
+          </Routes>
+        </Router>
       </header>
     </div>
   );

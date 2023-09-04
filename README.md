@@ -1,5 +1,3 @@
-
-# cp2-BucketList-Application
 Supply Chain Track and Trace UI built to consume [Supply Chain tracker API](https://github.com/daisyndungu/supply-chain-tracker-api/tree/dev)
 
 The building blocks are:

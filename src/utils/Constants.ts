@@ -15,33 +15,37 @@ interface UnSuccessfulApiResponse {
 }
 
 enum Status {
-    Dispatched = 'DISPATCHED',
-    Pending = 'PENDING',
-    Closed = 'CLOSED',
-    InProgress = 'INPROGRESS',
-    Cancelled = 'CANCELLED',
-    DELIVERED = 'DELIVERED'
+    MISSING='MISSING',
+    NOTRETURNED='NOTRETURNED',
+    DAMAGED='DAMAGED',
+    INCUSTODY='INCUSTODY'
+}
+
+
+interface IUser extends Document {
+    username: string,
+    emailAddress: string,
+    companyName: string,
+    phoneNumber: string
 }
 
 interface IItemEvent {
     _id: string,
     itemId: string,
-    custodianId: string,
+    custodian: IUser,
     updatedBy: string
     createdAt: Date,
     location: string,
-    status: Status,
 }
 
-interface IItem { // TODO - refactor(move to utils)
+interface IItem {
     _id: string;
     name: string;
     color: string;
     serialNumber: string;
     createdAt: Date,
-    consumerId: string; // TODO custodian
     createdBy: string;
-    status: string; //add status eg missing, returned, notreturned
+    status: Status;
 }
 
 interface RegistrationFormData {
@@ -51,8 +55,7 @@ interface RegistrationFormData {
     companyName: string,
     city: string,
     country: string,
-    phoneNumber: string, // Peform phone number verification
-    // userRole: UserRole,//TODO
+    phoneNumber: string,
     password: string
 }
 

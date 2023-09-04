@@ -9,11 +9,11 @@ import {
   Flex,
   Box,
   Button,
-  VStack,
-  Text
+  VStack
 } from "@chakra-ui/react";
 
-import ItemsTable from "./ItemsTable";
+import ItemsInCustody from "./ItemsInCustody";
+import ItemsOwnedTable from "./ItemsOwnedTable";
 
 import { logout } from '../utils/Auth'
 
@@ -38,10 +38,10 @@ const Dashboard: React.FC = () => {
                     </TabList>
                     <TabPanels>
                         <TabPanel>
-                            <ItemsTable/>
+                            <ItemsOwnedTable/>
                         </TabPanel>
                         <TabPanel>
-                            <Text>Under Construction</Text>
+                            <ItemsInCustody />
                         </TabPanel>
                     </TabPanels>
                     </Tabs>

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import {
   Table,
   Thead,
@@ -16,48 +15,17 @@ import {
   ModalHeader,
   ModalOverlay,
   useDisclosure,
-  useToast,
   Text
 } from "@chakra-ui/react";
 
 import EventTrail from "./EventTrail";
 
-import { IItem, SERVER_URL, TOKEN_KEY } from "../utils/Constants";
+import { IItem } from "../utils/Constants";
 
-const ItemsTable: React.FC = () => {
+const ItemsTable: React.FC<{error: string | null, items: IItem[], hideEventsBtn?: boolean }> = ({error, items, hideEventsBtn=false}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
   const [selectedItemName, setSelectedItemName] = useState<string>('');
-  const [myItems, setMyItems] = useState<IItem[]>([]);
-  const [error, setError] = useState<string | null>(null);
-const toast = useToast()
-
-  useEffect(() => {
-    const getItems = async () => {
-      await axios
-        .get(`${SERVER_URL}/items?isOwner=true`, {
-          headers: {
-            Authorization: localStorage.getItem(TOKEN_KEY),
-            "Content-Type": "application/json",
-          },
-        })
-        .then((res) => {
-          setMyItems(res.data.data);
-        })
-        .catch((error) => {
-          const err = error.response.data.error;
-          toast({
-            title: "",
-            description: err,
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-          });
-          setError(err)
-        });
-    };
-    getItems();
-  }, [error, toast]);
 
   const showEventsTrail = (item: IItem) => {
     setSelectedItemId(item._id);
@@ -67,7 +35,7 @@ const toast = useToast()
 
   return (
     <>
-      {error || !myItems || myItems.length === 0 ? <Text> No items</Text> : (
+      {error || !items || items.length === 0 ? <Text> No items</Text> : (
       <Table variant="simple" size="lg">
         <Thead>
           <Tr>
@@ -79,8 +47,8 @@ const toast = useToast()
           </Tr>
         </Thead>
         <Tbody>
-            {myItems &&
-            myItems.map((item) => {
+            {items &&
+            items.map((item: IItem) => {
               return (
                 <Tr key={item._id}>
                   <Td>{item.name}</Td>
@@ -88,7 +56,7 @@ const toast = useToast()
                   <Td>{item.serialNumber}</Td>
                   <Td>{item.status}</Td>
                   <Td>
-                    <Button
+                    <Button hidden={hideEventsBtn}
                       onClick={() => {
                         showEventsTrail(item);
                       }}

@@ -47,8 +47,10 @@ const EventTrail: React.FC<{ itemId: string }> = ({ itemId }) => {
                     </StepIndicator>
         
                     <Box flexShrink='0'>
-                    <StepTitle>{event.location}</StepTitle>
-                    <StepDescription>{event.status}</StepDescription>
+                        <StepTitle>{event.custodian.companyName}</StepTitle>
+                        <StepDescription>{event.location}</StepDescription>
+                        <StepDescription>Email: {event.custodian.emailAddress}</StepDescription>
+                        <StepDescription>Phone number: {event.custodian.phoneNumber}</StepDescription>
                     </Box>
                     <StepSeparator />
                 </Step>

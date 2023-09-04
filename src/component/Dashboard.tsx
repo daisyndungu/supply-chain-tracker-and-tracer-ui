@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom'
 import axios from "axios";
 import {
   Tab,
@@ -9,27 +10,26 @@ import {
   Flex,
   Box,
   Button,
-  Heading,
   VStack
 } from "@chakra-ui/react";
 
 import ItemsTable from "./ItemsTable";
 
-import { IItem, TOKEN_KEY } from "../utils/Constants";
+import { IItem, SERVER_URL, TOKEN_KEY } from "../utils/Constants";
 import { logout } from '../utils/Auth'
 
 const Dashboard: React.FC = () => {
   const [myItems, setMyItems] = useState<IItem[]>([]);
-  
+  const navigate = useNavigate();
   useEffect(() => {
     const getItems = async (isCustodian: boolean, isOwner: boolean) => {
       await axios
-        .get("http://localhost:3000/supplychain/api/v1/items?isOwner=true", {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": localStorage.getItem(TOKEN_KEY)
-          },
-        })
+        .get(`${SERVER_URL}/items?isOwner=true`, {
+            headers: {
+              "Authorization" : localStorage.getItem(TOKEN_KEY),
+              "Content-Type": "application/json",
+              }
+            })
         .then((res) => {
           setMyItems(res.data.data);
         })
@@ -44,7 +44,10 @@ const Dashboard: React.FC = () => {
     <Flex height="100vh">
         <Box bg="gray.200" width="250px" p={4}>
             <VStack spacing={2}>
-                <Button colorScheme='teal' variant='ghost' onClick={() => logout}>Logout</Button>
+                <Button colorScheme='teal' variant='ghost' onClick={() => {
+                    logout()
+                    navigate('/')
+                    }}>Logout</Button>
             </VStack>
         </Box>
         <Flex flex="1" p={4} flexDirection="column">

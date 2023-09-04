@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 
-import { SuccessfulApiResponse, RegistrationFormData } from '../utils/Constants'
+import { SuccessfulApiResponse, RegistrationFormData, SERVER_URL } from '../utils/Constants'
 
 const RegistrationForm: React.FC = () => {
   const [formData, setFormData] = useState<RegistrationFormData>({
@@ -37,7 +37,7 @@ const RegistrationForm: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post<SuccessfulApiResponse>('http://localhost:3000/supplychain/api/v1/register', formData);
+      const response = await axios.post<SuccessfulApiResponse>(`${SERVER_URL}/register`, formData);
       console.log('Registration successful', response.data);
     } catch (err) {
       setError('Registration failed. Please check your data.');

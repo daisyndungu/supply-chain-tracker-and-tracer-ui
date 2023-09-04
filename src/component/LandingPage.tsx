@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Box, Flex } from '@chakra-ui/react'
+import { Button, Box } from '@chakra-ui/react'
 import RegistrationForm from './RegistrationForm';
 import LoginForm from './Login';
 

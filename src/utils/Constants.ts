@@ -1,4 +1,6 @@
-const TOKEN_KEY = 'authToken';
+const SERVER_URL = process.env.REACT_APP_SERVER_URL
+
+const TOKEN_KEY="authToken"
 
 interface LoginApiResponse {
     token: string;
@@ -50,5 +52,5 @@ interface RegistrationFormData {
     password: string
 }
 
-export { TOKEN_KEY };
+export { TOKEN_KEY, SERVER_URL };
 export type { LoginApiResponse, IItemEvent, Status, IItem, SuccessfulApiResponse, RegistrationFormData };

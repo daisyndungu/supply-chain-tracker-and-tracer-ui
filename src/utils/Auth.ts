@@ -1,14 +1,12 @@
 import axios from 'axios';
 
-import { TOKEN_KEY, LoginApiResponse } from './Constants';
-
-// API response -  Add to constant file
-
+import { TOKEN_KEY, LoginApiResponse, SERVER_URL } from './Constants';
 
 const login = async (emailAddress: string, password: string) => {
     try {
         // TODO remove url
-        const response = await axios.post<LoginApiResponse>('http://localhost:3000/supplychain/api/v1/login', {
+        console.log(SERVER_URL)
+        const response = await axios.post<LoginApiResponse>(`${SERVER_URL}/login`, {
             emailAddress,
             password,
           });

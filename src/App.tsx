@@ -1,24 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
 
-function App() {
+import './App.css';
+import LandingPage from './component/LandingPage';
+import { isAuthenticated } from './utils/Auth'
+import Dashboard from './component/Dashboard';
+
+const ProtectedRoute = ({ children }: { children: React.ReactNode })  => {
+  return isAuthenticated() ?<> {children}</> : <Navigate to="/" />;
+};
+
+const  App: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Router>
+          <Routes>
+            <Route path="/" Component={LandingPage} />
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            } />
+          </Routes>
+        </Router>
     </div>
   );
 }

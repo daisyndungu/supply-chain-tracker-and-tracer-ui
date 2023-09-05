@@ -1,46 +1,33 @@
-# Getting Started with Create React App
+Supply Chain Track and Trace UI built to consume [Supply Chain tracker API](https://github.com/daisyndungu/supply-chain-tracker-api/tree/dev)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The building blocks are:
+  * React
+  * Typescript
 
-## Available Scripts
+## INSTALLATION
 
-In the project directory, you can run:
+These are the basic steps to install and run the application locally.
 
-### `npm start`
+* Prerequisite
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+      >> npm(version >=9.8.1) or yarn 1.22.19 installed
+      >> Node version >= v16.17.0
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+* Clone the application:
 
-### `npm test`
+      >> git clone https://github.com/daisyndungu/supply-chain-tracker-and-tracer-ui.git
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* install requirements locally:
 
-### `npm run build`
+      >> cd supply-chain-tracker-and-tracer-ui
+      >> git checkout dev
+      >> npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Create a .env file and copy the contents of .env.example file into it. The new file should be in the root folder. Assign the variables in the .env file with they respective values
+   
+ * Run server - npm/yarn. Please note, if the Supply Chain tracker API mentioned above is already running locally, it's already using port 3000. You will be prompted to expose this using port 3001 or the next available port. This will be launched in http://localhost:3001(or the next available port)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+       >> npm start
+   
+* [Manual testing Localy]To easily get started, please refer to this [ReadMe](https://github.com/daisyndungu/supply-chain-tracker-api/blob/dev/README.md)https://github.com/daisyndungu/supply-chain-tracker-api/blob/dev/README.md. The user account added [here](https://github.com/daisyndungu/supply-chain-tracker-api/blob/dev/src/seed/seed.ts)https://github.com/daisyndungu/supply-chain-tracker-api/blob/dev/src/seed/seed.ts and be used login. Be sure to seed the data first in the server side before testing using this app.
+       

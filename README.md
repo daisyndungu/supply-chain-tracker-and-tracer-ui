@@ -1,4 +1,4 @@
-Supply Chain Track and Trace UI built to consume [Supply Chain tracker API](https://github.com/daisyndungu/supply-chain-tracker-api/tree/dev)
+Supply Chain Track and Trace UI built to consume [Supply Chain tracker API in this Repo](https://github.com/daisyndungu/supply-chain-tracker-api/tree/dev)
 
 The building blocks are:
   * React
@@ -28,6 +28,6 @@ These are the basic steps to install and run the application locally.
  * Run server - npm/yarn. Please note, if the Supply Chain tracker API mentioned above is already running locally, it's already using port 3000. You will be prompted to expose this using port 3001 or the next available port. This will be launched in http://localhost:3001(or the next available port)
 
        >> npm start
-   
-* [Manual testing Localy]To easily get started, please refer to this [ReadMe](https://github.com/daisyndungu/supply-chain-tracker-api/blob/dev/README.md)https://github.com/daisyndungu/supply-chain-tracker-api/blob/dev/README.md. The user account added [here](https://github.com/daisyndungu/supply-chain-tracker-api/blob/dev/src/seed/seed.ts)https://github.com/daisyndungu/supply-chain-tracker-api/blob/dev/src/seed/seed.ts and be used login. Be sure to seed the data first in the server side before testing using this app.
+ 
+* [Manual testing Localy]To easily get started, please refer to this [ReadMe](https://github.com/daisyndungu/supply-chain-tracker-api)https://github.com/daisyndungu/supply-chain-tracker-api/blob/dev/README.md. The user account added [here](https://github.com/daisyndungu/supply-chain-tracker-api/blob/dev/src/seed/seed.ts)https://github.com/daisyndungu/supply-chain-tracker-api/blob/dev/src/seed/seed.ts and be used login. Be sure to seed the data first in the server side before testing using this app.
        
